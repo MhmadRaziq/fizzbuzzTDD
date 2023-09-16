@@ -10,27 +10,59 @@ import XCTest
 
 final class fizzbuzzTDDTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
+  func test_print_numberZero() {
+    expect(print: 0, withResult: "Not Valid Input" )
+
+  }
+
+  func test_print_number() {
+    expect(print: 1, withResult: "1")
+    expect(print: 2, withResult: "2")
+    expect(print: 4, withResult: "4")
+  }
+
+  func test_print_fizz_whenMultipleOfThree() {
+    let values = [3,6,9,12,18]
+    values.forEach { number in
+      expect(print: number, withResult: "Fizz")
+    }
+  }
+  func test_print_Buzz_whenMultipleOfFive() {
+    let values = [5,10,20,50,100]
+    values.forEach { number in
+      expect(print: number, withResult: "Buzz")
+    }
+  }
+
+  func test_print_FizzBuzz_whenNumberIsMultipleOfFifteen() {
+    let values = [15,30,45]
+    values.forEach { number in
+      expect(print: number, withResult: "FizzBuzz")
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+  }
+  func test_allCases() {
+    let numbers = Array(1...100)
+    numbers.forEach { number in
+      print(FizzBuzz.parse(number))
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
     }
+  }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+  // MARK :- Helpers
+
+  // what you achived from making makeSUT() function
+
+  func expect(print number: Int , withResult result: String, file: StaticString = #filePath, line: UInt = #line) {
+    XCTAssertEqual(FizzBuzz.parse(number), result, file: file , line: line)
+  }
+
+  private enum printResult {
+    case NotValidInput
+    case Fizz
+    case Buzz
+    case FizzBuzz
+  }
 
 }
